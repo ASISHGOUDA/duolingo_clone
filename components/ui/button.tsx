@@ -10,7 +10,17 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-white text-black border-slate-200 border-2 border-b-4 active:border-b-2 hover:bg-slate-100 text-slate-500",
-        
+        Primary: "bg-sky-400 text-primary-foreground hover:bg-sky-500/90  border-sky-500 border-2 border-b-4 active:border-b-0",
+        primaryOutline: "bg-white text-sky-500 hover:bg-slate-100",
+        secondary: "bg-green-500 text-primary-foreground hover:bg-green-500/90  border-green-600 border-2 border-b-4 active:border-b-0",
+        secondaryOutline:"bg-white text-green-500 hover:bg-slate-100",
+        danger: "bg-rose-500 text-primary-foreground hover:bg-rose-500/90  border-rose-600 border-2 border-b-4 active:border-b-0",
+        dangerOutline:"bg-white text-rose-500 hover:bg-slate-100",
+        super: "bg-indigo-500 text-primary-foreground hover:bg-indigo-500/90  border-indigo-600 border-2 border-b-4 active:border-b-0",
+        superOutline:"bg-white text-indigo-500 hover:bg-slate-100",
+        ghost: "bg-transparent text-slate-500 border-transparent border-0 hover:bg-slate-100",
+        sidebar: "bg-transparernt text-slate-500 border-2 border-transparent hover:bg-slate-100 transition-none",
+        sidebarOutline:"bg-sky-500/15 text-sky-500 border-sky-300 border-2 hover:bg-sky-500/20 transition-none",
       },
       size: {
         default: "h-11 px-4 py-2",
