@@ -21,7 +21,11 @@ export const Footer = () => {
               </Button>
       </SignUpButton>
       {/* to do add the SignUpButton Modal to the below buttons */}
-      <Button size="lg" variant="ghost" className="w-full">
+      <SignUpButton 
+                mode="modal"
+                afterSignInUrl="/learn"
+                afterSignUpUrl="/learn">
+                  <Button size="lg" variant="ghost" className="w-full">
         <Image 
         src="/es.svg"
         alt="Spanish"
@@ -30,18 +34,30 @@ export const Footer = () => {
         className="mr-4 rounded-md"
         />
         SPANISH
-      </Button>
-      <Button size="lg" variant="ghost" className="w-full">
-        <Image 
-        src="/fr.svg"
-        alt="France"
-        height={32}
-        width={40}
-        className="mr-4 rounded-md"
-        />
-        FRENCH
-      </Button>
-      <Button size="lg" variant="ghost" className="w-full">
+                  </Button>
+      </SignUpButton>
+      
+      <SignUpButton 
+                mode="modal"
+                afterSignInUrl="/learn"
+                afterSignUpUrl="/learn">
+                <Button size="lg" variant="ghost" className="w-full">
+                <Image 
+                src="/fr.svg"
+                alt="France"
+                height={32}
+                width={40}
+                className="mr-4 rounded-md"
+                />
+                FRENCH
+                </Button>
+      </SignUpButton>
+
+      <SignUpButton 
+                mode="modal"
+                afterSignInUrl="/learn"
+                afterSignUpUrl="/learn">
+                  <Button size="lg" variant="ghost" className="w-full">
         <Image 
         src="/it.svg"
         alt="Italy"
@@ -50,8 +66,14 @@ export const Footer = () => {
         className="mr-4 rounded-md"
         />
         ITALIAN
-      </Button>
-      <Button size="lg" variant="ghost" className="w-full">
+                  </Button>
+      </SignUpButton>
+      
+      <SignUpButton 
+                mode="modal"
+                afterSignInUrl="/learn"
+                afterSignUpUrl="/learn">
+                  <Button size="lg" variant="ghost" className="w-full">
         <Image 
         src="/jp.svg"
         alt="Japan"
@@ -60,7 +82,9 @@ export const Footer = () => {
         className="mr-4 rounded-md"
         />
         JAPANESE
-      </Button>
+                  </Button>
+      </SignUpButton>
+      
       </div>
     </footer>
   );
