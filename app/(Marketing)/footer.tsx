@@ -20,7 +20,7 @@ export const Footer = () => {
                   CROATIAN
               </Button>
       </SignUpButton>
-      {/* to do add the SignUpButton Modal to the below buttons */}
+      
       <SignUpButton 
                 mode="modal"
                 afterSignInUrl="/learn"
