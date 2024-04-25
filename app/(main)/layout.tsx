@@ -1,9 +1,15 @@
 import { Sidebar } from "@/components/sidebar";
 import { MobileHeader } from "@/components/mobile-header";
+import { Metadata } from "next";
 
 type Props = {
   children: React.ReactNode;
 }
+
+export const metadata: Metadata = {
+  title: "Learn with Duolingo 🐥", 
+  description: "Enhance your language skills with fun and interactive lessons on Duolingo!",
+};
 
 const MainLayout = ({ children, }: Props) => {
   return (
