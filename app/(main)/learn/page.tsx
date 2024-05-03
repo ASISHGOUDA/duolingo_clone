@@ -5,6 +5,7 @@ import { Header } from "./header";
 import { FeedWrapper } from "@/components/feed-wrapper";
 import { StickyWrapper } from "@/components/sticky-wrapper";
 import { title } from "process";
+import { User } from "lucide-react";
 
 
 const LearnPage = async () => {
@@ -23,14 +24,14 @@ const LearnPage = async () => {
     <div className="flex flex-row-reverse gap-[48px] px-6">
       <StickyWrapper>
         <UserProgress
-        activeCourse={{ title: "Spanish", imageSrc: "/es.svg" }}
-        hearts={5}
-        points={100}
+        activeCourse={userProgress.activeCourse}
+        hearts={userProgress.hearts}
+        points={userProgress.points}
         hasActiveSubscription={false}
         />
       </StickyWrapper>
       <FeedWrapper>
-        <Header title = "Spanish" />
+        <Header title={userProgress.activeCourse.title} />
       </FeedWrapper>
     </div>
   );
