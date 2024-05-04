@@ -1,6 +1,8 @@
+import { Description } from "@radix-ui/react-dialog";
 import { relations } from "drizzle-orm";
 import { boolean, integer, pgEnum, pgTable, serial, text } from "drizzle-orm/pg-core";
-
+import { title } from "process";
+//Courses Table
 export const courses = pgTable("courses", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
@@ -8,10 +10,105 @@ export const courses = pgTable("courses", {
   
 });
 
+//Courses Relations
 export const coursesRelations = relations(courses, ({ many }) => ({
   userProgress: many(userProgress),
+  units: many(units),
 }));
 
+
+//Units Table
+export const units = pgTable("units", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(), //unit 1
+  Description: text("description").notNull(), //Learn the basics of Spanish
+  courseId: integer("course_id").references(() => courses.id, { onDelete: "cascade" }).notNull(),
+  order: integer("order").notNull(),
+});
+
+//Units Relations
+export const unitsRelations = relations(units, ({ many, one }) => ({
+  course: one(courses, {
+    fields: [units.courseId],
+    references: [courses.id],
+  }),
+  lessons: many(lessons),
+}));
+
+//Lessons Table
+export const lessons = pgTable("lessons", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  unitId: integer("unit_id").references(() => units.id, { onDelete: "cascade" }).notNull(),
+  order: integer("order").notNull(),
+});
+
+//Lessons Relations
+export const lessonsRelations = relations(lessons, ({ one, many }) => ({
+  unit: one(units, {
+    fields: [lessons.unitId],
+    references: [units.id],
+  }),
+  challenges: many(challenges),
+}));
+
+
+export const challengesEnum = pgEnum("type", ["SELECT", "ASSIST"]);
+//Challenges Table
+export const challenges = pgTable("challenges", {
+  id: serial("id").primaryKey(),
+  lessonId: integer("lessons_id").references(() => lessons.id, { onDelete: "cascade" }).notNull(),
+  type: challengesEnum("type").notNull(),
+  question: text("question").notNull(),
+  order: integer("order").notNull(),
+});
+
+//Challenges Relations
+export const challengesRelations = relations(challenges, ({ one, many }) => ({
+  unit: one(lessons, {
+    fields: [challenges.lessonId],
+    references: [lessons.id],
+  }),
+  challengeOptions: many(challengeOptions),
+  challengeProgress: many(challengeProgress),
+}));
+
+//Challenge Options
+export const challengeOptions = pgTable("challenge_options", {
+  id: serial("id").primaryKey(),
+  challengeId: integer("challenge_id").references(() => challenges.id, { onDelete: "cascade" }).notNull(),
+  text: text("text").notNull(),
+  correct: boolean("correct").notNull(),
+  imageSrc: text("image_src"),
+  audioSrc: text("audio_src"),
+});
+
+//challenge Options Relations
+export const challengeOptionsRelations = relations(challengeOptions, ({ one }) => ({
+  challenge: one(challenges, {
+    fields: [challengeOptions.challengeId],
+    references: [challenges.id],
+  }),
+}));
+
+// ChallengeProgress Table
+export const challengeProgress = pgTable("challenge_progress", {
+  id: serial("id").primaryKey(),
+  userId: text("user_id").notNull(), // TODO: Confirm this doesn't break
+  challengeId: integer("challenge_id").references(() => challenges.id, { onDelete: "cascade" }).notNull(),
+  completed: boolean("completed").notNull().default(false),
+});
+
+//ChallengeProgress Relation
+export const challengeProgressRelations = relations(challengeProgress, ({ one }) => ({
+  challenge: one(challenges, {
+    fields: [challengeProgress.challengeId],
+    references: [challenges.id],
+  }),
+}));
+
+
+//UserProgress Table
 export const userProgress = pgTable("user_progress", {
   userId: text("user_id").primaryKey(),
   userName: text("user_name").notNull().default("user"),
@@ -22,6 +119,7 @@ export const userProgress = pgTable("user_progress", {
 
 });
 
+//UserProgress Relations
 export const userProgressRelations = relations(userProgress, ({ one }) => ({
   activeCourse: one(courses, {
     fields: [userProgress.activeCourseId],
