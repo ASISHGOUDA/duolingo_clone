@@ -1,7 +1,7 @@
-import { Description } from "@radix-ui/react-dialog";
+
 import { relations } from "drizzle-orm";
 import { boolean, integer, pgEnum, pgTable, serial, text } from "drizzle-orm/pg-core";
-import { title } from "process";
+
 //Courses Table
 export const courses = pgTable("courses", {
   id: serial("id").primaryKey(),
@@ -21,7 +21,7 @@ export const coursesRelations = relations(courses, ({ many }) => ({
 export const units = pgTable("units", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(), //unit 1
-  Description: text("description").notNull(), //Learn the basics of Spanish
+  description: text("description").notNull(), //Learn the basics of Spanish
   courseId: integer("course_id").references(() => courses.id, { onDelete: "cascade" }).notNull(),
   order: integer("order").notNull(),
 });
