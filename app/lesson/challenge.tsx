@@ -44,7 +44,6 @@ export const Challenge = ({
         type={type}
         />
       ))}
-      Challenge
     </div>
   );
 };
