@@ -1,10 +1,12 @@
 "use client";
 
-import { challengeOptions, challenges } from "@/db/schema";
-
 import { useState } from "react";
 
+import { challengeOptions, challenges } from "@/db/schema";
+
 import { Header } from "./header";
+import { Challenge } from "./challenge";
+import { QuestionBubble } from "./question-bubble";
 
 
 type Props = {
@@ -34,6 +36,8 @@ export const Quiz = ({
   });
 
   const challenge = challenges[activeIndex];
+  const options = challenge?.challengeOptions ?? [];
+
 
   const title = challenge.type === "ASSIST"
   ? "select the correct meaning" 
@@ -53,7 +57,17 @@ export const Quiz = ({
                 {title}
               </h1>
               <div>
-                {/* Todo: Challenge comoponent */}
+                {challenge.type === "ASSIST" && (
+                  <QuestionBubble question={challenge.question} />
+                )}
+                <Challenge
+                options={options}
+                onSelect={() => {}}
+                status="none"
+                selectedOption={undefined}
+                disabled={false}
+                type={challenge.type}
+                />
               </div>
             </div>
           </div>
