@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { toast } from "sonner";
 
 import { challengeOptions, challenges } from "@/db/schema";
 
@@ -8,6 +9,8 @@ import { Header } from "./header";
 import { Footer } from "./footer";
 import { Challenge } from "./challenge";
 import { QuestionBubble } from "./question-bubble";
+import { upsertChallengeProgress } from "@/actions/challenge-progress";
+import { reduceHearts } from "@/actions/user-progress";
 
 
 type Props = {
@@ -78,9 +81,40 @@ export const Quiz = ({
     }
 
     if (correctOption && correctOption.id === selectedOption) {
-      console.log("correct option");
+      startTransition(() => {
+        upsertChallengeProgress(challenge.id)
+        .then((response) => {
+          if (response?.error === "hearts") {
+            console.error("Missing hearts");
+            return;
+          }
+
+          setStatus("correct");
+          setPercentage((prev) => prev + 100 / challenges.length);
+
+          if (initialPercentage === 100) {
+            setHearts((prev) => Math.min(prev + 1, 5));
+          }
+        })
+        .catch(() => toast.error("something went wrong. Please try again"));
+      });
     } else {
-      console.error("wrong option");
+      startTransition(() => {
+        reduceHearts(challenge.id)
+        .then((response) => {
+          if (response?.error === "hearts") {
+            console.error("Missing hearts");
+            return;
+          }
+
+          setStatus("wrong");
+
+          if (!response?.error) {
+            setHearts((prev) => Math.max(prev - 1, 0));
+          }
+        })
+        .catch(() => toast.error("something went wrong. Please try again"));
+      });
     }
   };
 
@@ -110,7 +144,7 @@ export const Quiz = ({
                 onSelect={onSelect}
                 status={status}
                 selectedOption={selectedOption}
-                disabled={false}
+                disabled={pending}
                 type={challenge.type}
                 />
               </div>
@@ -118,7 +152,7 @@ export const Quiz = ({
           </div>
       </div>
       <Footer 
-      disabled={!selectedOption}
+      disabled={pending || !selectedOption}
       status={status}
       onCheck={onContinue}
       />
