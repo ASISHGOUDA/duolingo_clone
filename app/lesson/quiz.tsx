@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 
 import { challengeOptions, challenges } from "@/db/schema";
 
@@ -28,6 +28,9 @@ export const Quiz = ({
   initialLessonChallenges,
   userSubscription
 }: Props) => {
+  const [pending, startTransition] = useTransition();
+
+
   const [hearts, setHearts] = useState(initialHearts);
   const [percentage, setPercentage] = useState(initialPercentage);
   const [challenges] = useState(initialLessonChallenges);
@@ -42,10 +45,43 @@ export const Quiz = ({
   const challenge = challenges[activeIndex];
   const options = challenge?.challengeOptions ?? [];
 
+  const onNext = () => {
+    setActiveIndex((current) => current + 1);
+  };
+
   const onSelect = (id: number) => {
     if (status !== "none") return;
 
     setSelectedOption(id);
+  };
+
+  const onContinue = () => {
+    if (!selectedOption) return;
+
+    if(status === "wrong") {
+      setStatus("none");
+      setSelectedOption(undefined);
+      return;
+    }
+
+    if(status === "correct") {
+      onNext();
+      setStatus("none");
+      setSelectedOption(undefined);
+      return;
+    }
+
+    const correctOption = options.find((option) => option.correct);
+
+    if(!correctOption) {
+      return;
+    }
+
+    if (correctOption && correctOption.id === selectedOption) {
+      console.log("correct option");
+    } else {
+      console.error("wrong option");
+    }
   };
 
   const title = challenge.type === "ASSIST"
@@ -84,7 +120,7 @@ export const Quiz = ({
       <Footer 
       disabled={!selectedOption}
       status={status}
-      onCheck={() => {}}
+      onCheck={onContinue}
       />
     </>
   );
