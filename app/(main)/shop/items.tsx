@@ -5,6 +5,7 @@ import { refillHearts } from "@/actions/user-progress";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useTransition } from "react";
+import { createStripeUrl } from "@/actions/user-subscription";
 
 const POINTS_TO_REFILL = 10;
 
@@ -30,7 +31,13 @@ export const Items = ({ hearts, points, hasActiveSubscription }: Props) => {
 
 const onUpgrade = () => {
   startTransition(() => {
-    
+    createStripeUrl()
+    .then((response) => {
+      if (response.data) {
+        window.location.href = response.data;
+      }
+    })
+    .catch(() => toast.error("something went wrong in stripe"));
   });
 };
 
