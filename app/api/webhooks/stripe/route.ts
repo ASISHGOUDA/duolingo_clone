@@ -4,10 +4,10 @@ import { headers } from "next/headers";
 
 import { stripe } from "@/lib/stripe";
 import { NextResponse } from "next/server";
-import { error } from "console";
 
-export async function POST(request: Request) {
-  const body = await request.text();
+
+export async function POST(req: Request) {
+  const body = await req.text();
   const signature = headers().get("Stripe-Signature") as string;
 
   let event: Stripe.Event;
@@ -23,4 +23,6 @@ export async function POST(request: Request) {
       status: 400,
     });
   }
-}
+
+  return new NextResponse(null, { status: 200 });
+};
