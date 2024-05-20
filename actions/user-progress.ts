@@ -1,16 +1,17 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { getCourseById, getUserProgress } from "@/db/queries";
+import { getCourseById, getUserProgress, getUserSubscription } from "@/db/queries";
 import { auth, currentUser } from "@clerk/nextjs";
 import  db  from "@/db/drizzle";
 import { challengeProgress, challenges, userProgress } from "@/db/schema";
 import { revalidatePath } from "next/cache";
 import { and, eq } from "drizzle-orm";
+import { POINTS_TO_REFILL } from "@/constants";
 
 
 // todo move alongside item component
-const POINTS_TO_REFILL = 10;
+
 
 
 export const upsertUserProgress = async (courseId: number) => {
@@ -29,10 +30,10 @@ export const upsertUserProgress = async (courseId: number) => {
   
   
 
-  //Todo: Enable once units and lessons are added
-  // if(!course.units.length || !course.units[0].lessons.length) {
-  //   throw new Error("Course is empty");
-  // }
+  
+  if(!course.units.length || !course.units[0].lessons.length) {
+    throw new Error("Course is empty");
+  }
 
   const existingUserProgress = await getUserProgress();
 
@@ -68,6 +69,7 @@ export const reduceHearts = async (challengeId: number) => {
   }
 
   const currentUserProgress = await getUserProgress();
+  const userSubscription = await getUserSubscription();
   //TODO get user Subscription
 
   const challenge = await db.query.challenges.findFirst({
@@ -98,7 +100,9 @@ export const reduceHearts = async (challengeId: number) => {
   }
 
 
-  //TODO: Handle subscription
+  if (userSubscription?.isActive){
+    return {error: "Already subscribed"}
+  }
 
   if (currentUserProgress.hearts === 0) {
     return {error: "No hearts left"};

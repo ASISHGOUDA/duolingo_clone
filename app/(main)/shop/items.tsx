@@ -6,8 +6,9 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useTransition } from "react";
 import { createStripeUrl } from "@/actions/user-subscription";
+import { POINTS_TO_REFILL } from "@/constants";
 
-const POINTS_TO_REFILL = 10;
+
 
 type Props = {
   hearts: number;
