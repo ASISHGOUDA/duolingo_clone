@@ -1,12 +1,21 @@
-import { Create, Datagrid, SimpleForm, TextInput, required } from "react-admin";
+import { Create, Datagrid, NumberInput, ReferenceInput, SimpleForm, TextInput, required } from "react-admin";
 
-export const CourseCreate = () => {
+export const UnitCreate = () => {
   
   return(
     <Create>
     <SimpleForm>
       <TextInput source="title" validate={[required()]}  label="Title"/>
-      <TextInput source="imageSrc" validate={[required()]} label="Image"/>
+      <TextInput source="description" validate={[required()]} label="Description"/>
+      <ReferenceInput
+      source="courseId"
+      reference="courses"
+      />
+      <NumberInput
+      source="order"
+      validate={[required()]}
+      label="Order"
+      />
     </SimpleForm>
   </Create>
   );
