@@ -28,5 +28,9 @@ https://github.com/ASISHGOUDA/duolingo_clone/blob/main/db/schema.ts
 4. Replace the example values with your actual keys and URLs.
 5. Run the project using `npm run dev` or your preferred command.
 
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+### Cloning the repository
+
+```bash
+https://github.com/ASISHGOUDA/duolingo_clone.git
+```
+
