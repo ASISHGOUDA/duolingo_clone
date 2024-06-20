@@ -1,4 +1,4 @@
-# Building DuoLingo Clone with TypeScript, Tailwind, PostgresDB, Drizzle ORM & Stripe
+#DuoLingo Clone with TypeScript, Tailwind, PostgresDB, Drizzle ORM & Stripe
 
 https://github.com/ASISHGOUDA/duolingo_clone/assets/94213250/0890410d-0681-4342-9d96-cbb5999201c3
 ### Database Schema
