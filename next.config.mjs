@@ -25,6 +25,7 @@ const nextConfig = {
       },
     ];
   },
+  output: "standalone", //TO add support for docker image  
 };
 
 export default nextConfig;
