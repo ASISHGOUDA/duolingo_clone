@@ -1,7 +1,6 @@
 # DuoLingo Clone with TypeScript, Tailwind, PostgresDB, Drizzle ORM & Stripe
 
-### The Duolingo Clone is now Dockerized.
-### You can use it in Docker via the instructions provided in the [Docker README](Docker-Readme.md).
+### The Duolingo Clone is now Dockerized. You can use it in Docker via the instructions provided in the [Docker README](Docker-Readme.md).
 
 
 https://github.com/ASISHGOUDA/duolingo_clone/assets/94213250/0890410d-0681-4342-9d96-cbb5999201c3
