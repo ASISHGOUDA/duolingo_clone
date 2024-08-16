@@ -1,0 +1,175 @@
+{
+	"info": {
+		"_postman_id": "07e4fb22-f271-4f32-b0cf-4ed99fbc1b7e",
+		"name": "duolingo_api_collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32760465"
+	},
+	"item": [
+		{
+			"name": "Lesson",
+			"item": [
+				{
+					"name": "get_lessons_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://duolingo-clone-ashy.vercel.app/lesson",
+							"protocol": "https",
+							"host": [
+								"duolingo-clone-ashy",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"lesson"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Challenge_options(Admin)",
+			"item": [
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://duolingo-clone-ashy.vercel.app/challengeOptions\n",
+							"protocol": "https",
+							"host": [
+								"duolingo-clone-ashy",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"challengeOptions\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://duolingo-clone-ashy.vercel.app/challengeOptions\n",
+							"protocol": "https",
+							"host": [
+								"duolingo-clone-ashy",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"challengeOptions\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://duolingo-clone-ashy.vercel.app/challengeOptions\n",
+							"protocol": "https",
+							"host": [
+								"duolingo-clone-ashy",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"challengeOptions\n"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Challenges",
+			"item": [
+				{
+					"name": "challenges",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://duolingo-clone-ashy.vercel.app/challenges",
+							"protocol": "https",
+							"host": [
+								"duolingo-clone-ashy",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"challenges"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "Courses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://duolingo-clone-ashy.vercel.app/courses",
+							"protocol": "https",
+							"host": [
+								"duolingo-clone-ashy",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"courses"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Units",
+			"item": [
+				{
+					"name": "Units",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://duolingo-clone-ashy.vercel.app/units",
+							"protocol": "https",
+							"host": [
+								"duolingo-clone-ashy",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"units"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
