@@ -26,8 +26,8 @@ https://github.com/ASISHGOUDA/duolingo_clone/blob/main/db/schema.ts
 ## Setup Instructions
 
 1. Clone the repository.
-2. Create a `.env.local` file in the root directory of the project.
-3. Copy the environment variables from the table above and paste them into the `.env.local` file.
+2. Create a `.env` file in the root directory of the project.
+3. Copy the environment variables from the table above or from `.env.example` and paste them into the `.env ` file.
 4. Replace the example values with your actual keys and URLs.
 5. Run the project using `npm run dev` or your preferred command.
 
